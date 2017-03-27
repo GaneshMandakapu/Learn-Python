@@ -6,7 +6,7 @@ import datetime
 winapp = tk.Tk()
 
 # Set geometry of frame
-winapp.geometry("300x400")
+winapp.geometry("400x500")
 
 # Give a title to your frame
 winapp.title("Age Calculator App")
@@ -53,24 +53,20 @@ class Person:
 		return age
 
 
-pritpal = Person("Preetpal",datetime.date(1992,6,5))
-
-
-#print(pritpal.age())
-
 def calculate_age():
-	name = entry_name.get()
-	year = int(entry_year.get())
-	month = int(entry_month.get())
-	day = int(entry_day.get())
-	person_age = Person(name,datetime.date(year,month,day))
-	#print("name = {} year = {} month = {} day = {}".format(name,year,month,day))
-	#print("{} age is {}".format(name,person_age.age()))
-	age = "{} is {} years old".format(name,person_age.age())
+	try:
+		name = entry_name.get()
+		year = int(entry_year.get())
+		month = int(entry_month.get())
+		day = int(entry_day.get())
+		person_age = Person(name,datetime.date(year,month,day))
+		age = "{} is {} years old".format(name,person_age.age())
+	except ValueError:
+		age = "Invalid dateformat"
 	text_ans = tk.Text(winapp,height=4,width=40)
 	text_ans.grid(column=1,row=8)
 	text_ans.insert(tk.END,age)
-
+	
 
 # Adding buttons
 button_calc = tk.Button(winapp,text="Calculate Age !!!",command=calculate_age)
