@@ -23,20 +23,26 @@ entry_password.grid(column=1,row=2)
 def Authenticate():
 	user_id = entry_name.get()
 	passwd = entry_password.get()
-	print("A button is clicked ..")
-	print("user id = {} , password is = {}".format(user_id,passwd))
+	#print("user id = {} , password is = {}".format(user_id,passwd))
 	passwd_db = Getpassword(user_id)
-	print("Password in db = {} ".format(passwd_db[0][1]))
+
 	text_ans = tk.Text(root,height = 5,width = 30)
 	text_ans.grid(column=1,row=4)
+	msg = "Login error : user id not found"
+	if(len(passwd_db) == 0):
+		text_ans.insert(tk.END, msg)
+		return
 	if(passwd == passwd_db[0][1]):
 		msg = "Successfully logged in "
 	else:
-		msg = "login error : invalid username or password"
+		msg = "login error : password enter is incorrect"
 	text_ans.insert(tk.END, msg)
 
 button_login = tk.Button(root,text="Login ",command = Authenticate)
 button_login.grid(column=1,row=3)
+
+button_signup = tk.Button(root,text="Sign up ",command = Authenticate)
+button_signup.grid(column=1,row=4)
 
 # adding a image to the form 
 image = Image.open('PwdManger-image.jpg')
